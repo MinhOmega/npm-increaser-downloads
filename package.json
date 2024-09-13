@@ -1,6 +1,6 @@
 {
   "name": "npm-increaser-downloads",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Raises the popularity score on your package through nefarious means.",
   "author": "MinhOmega",
   "license": "MIT",
