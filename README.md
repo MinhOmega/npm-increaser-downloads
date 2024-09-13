@@ -25,6 +25,12 @@ Install `npm-increaser-downloads` globally using npm:
 npm install -g npm-increaser-downloads
 ```
 
+or
+
+```bash
+npx npm-increaser-downloads
+```
+
 ### 🚀 Running
 
 Setup configuration and run:
@@ -36,6 +42,10 @@ npm-increaser-downloads
 Once you specify your configuration, this will start spamming downloads for the provided package in the npmjs registry. This will increase the popularity score of the npm package.
 
 NOTE: The npmJS Weekly Downloads are updated **once every 24 hours**, so results will not be instantly visible.
+
+### 🎥 Demo
+
+![Demo](https://github.com/user-attachments/assets/964784a9-68d0-4c84-af09-ac9738a0e5a5)
 
 ### ⚙️ Configuration options
 
@@ -60,7 +70,7 @@ git clone https://github.com/lachiejames/npm-increaser-downloads.git
 
 ### 🔧 Setting up your configuration
 
-Open `npm-increaser-downloads.config.js` from the root directory, and populate the configuration options as shown in the table above.
+Open `npm-increaser-downloads.config.ts` from the root directory, and populate the configuration options as shown in the table above.
 
 ### 💻 Running locally
 
