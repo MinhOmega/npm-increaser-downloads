@@ -53,15 +53,13 @@
     "git": {
       "commitMessage": "chore: release ${version}",
       "tagName": "v${version}",
-      "commitMode": "direct",
-      "push": true
+      "push": false
     },
     "npm": {
-      "publish": true
+      "publish": false
     },
     "github": {
-      "release": true,
-      "web": true
+      "release": false
     },
     "plugins": {
       "@release-it/conventional-changelog": {
