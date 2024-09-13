@@ -52,13 +52,16 @@
   "release-it": {
     "git": {
       "commitMessage": "chore: release ${version}",
-      "tagName": "v${version}"
+      "tagName": "v${version}",
+      "commitMode": "direct",
+      "push": true
     },
     "npm": {
       "publish": true
     },
     "github": {
-      "release": true
+      "release": true,
+      "web": true
     },
     "plugins": {
       "@release-it/conventional-changelog": {
