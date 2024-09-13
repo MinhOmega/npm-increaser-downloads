@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  merge_group:
+    types:
+      - checks_requested
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+    - name: Cache yarn dependencies
+      uses: actions/cache@v3
+      id: yarn-cache
+      with:
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
+
+    - name: Run tests with coverage
+      run: yarn test
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+
+    - name: Get coverage percentage
+      id: coverage
+      run: |
+        COVERAGE=$(cat coverage/coverage-summary.json | jq -r '.total.lines.pct')
+        echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
+
+    - name: Comment PR
+      uses: actions/github-script@v6
+      if: github.event_name == 'pull_request'
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          const fs = require('fs');
+          const coverageData = JSON.parse(fs.readFileSync('coverage/coverage-summary.json', 'utf8'));
+          
+          let coverageTable = '| Category | Percentage | Covered | Total |\n';
+          coverageTable += '|-----------|------------|---------|-------|\n';
+          
+          for (const [category, data] of Object.entries(coverageData.total)) {
+            const percentage = data.pct.toFixed(2);
+            coverageTable += `| ${category} | ${percentage}% | ${data.covered} | ${data.total} |\n`;
+          }
+          
+          const comment = `## 📊 Test Coverage Report\n\n${coverageTable}\n\nLast updated: ${new Date().toUTCString()}`;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });
