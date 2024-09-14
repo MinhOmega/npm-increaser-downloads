@@ -11,7 +11,8 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "skipLibCheck": true
   },
   "include": ["src/**/*.ts", "npm-increaser-downloads.config.ts"],
   "exclude": ["src/**/*.spec.ts"]
