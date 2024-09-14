@@ -1,59 +1,39 @@
-import prompts, { Answers } from "prompts";
-
+import { input, number } from '@inquirer/prompts';
 import { Config } from "../models/config.model";
-
 import { validateNumbers, validatePackageName } from "./validators";
 
-// `prompts` package uses generics which accepts string literal values and then uses those values as types
-// This means I have to ensure I use a string literal type that matches a string literal value
-const PROMPT_NAME = "value";
-type PromptType = "value";
-
 export const getPackageName = async (): Promise<string> => {
-  const promptData: Answers<PromptType> = await prompts({
-    name: PROMPT_NAME,
-    type: "text",
+  return input({
     message: "Package name: ",
     validate: (name: string) => validatePackageName(name),
   });
-
-  return promptData[PROMPT_NAME];
 };
 
 export const getNumberOfDownloads = async (): Promise<number> => {
-  const promptData: Answers<PromptType> = await prompts({
-    name: PROMPT_NAME,
-    type: "number",
+  const result = await number({
     message: "Number of downloads: ",
-    initial: 1000,
-    validate: (downloads: number) => validateNumbers(downloads),
+    default: 1000,
+    validate: (downloads: number | undefined) => validateNumbers(downloads),
   });
-
-  return promptData[PROMPT_NAME];
+  return result ?? 1000;
 };
 
 export const getMaxConcurrentDownloads = async (): Promise<number> => {
-  const promptData: Answers<PromptType> = await prompts({
-    name: PROMPT_NAME,
-    type: "number",
+  const result = await number({
     message: "Number of concurrent downloads: ",
-    initial: 300,
-    validate: (downloads: number) => validateNumbers(downloads),
+    default: 300,
+    validate: (downloads: number | undefined) => validateNumbers(downloads),
   });
-
-  return promptData[PROMPT_NAME];
+  return result ?? 300;
 };
 
 export const getDownloadTimeout = async (): Promise<number> => {
-  const promptData: Answers<PromptType> = await prompts({
-    name: PROMPT_NAME,
-    type: "number",
+  const result = await number({
     message: "Time to wait for a download to complete (in ms): ",
-    initial: 3000,
-    validate: (downloads: number) => validateNumbers(downloads),
+    default: 3000,
+    validate: (downloads: number | undefined) => validateNumbers(downloads),
   });
-
-  return promptData[PROMPT_NAME];
+  return result ?? 3000;
 };
 
 const getEmptyConfig = (): Config => {
