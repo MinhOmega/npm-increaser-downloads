@@ -1,5 +1,12 @@
 
 
+## [0.1.1-alpha.4](https://github.com/MinhOmega/npm-increaser-downloads/compare/v0.1.1-alpha.3...v0.1.1-alpha.4) (2024-09-14)
+
+
+### Bug Fixes
+
+* crash on running command line ([517edd9](https://github.com/MinhOmega/npm-increaser-downloads/commit/517edd9128aeb94e74055ace983549e81283a279))
+
 ## [0.1.1-alpha.3](https://github.com/MinhOmega/npm-increaser-downloads/compare/v0.1.1-alpha.2...v0.1.1-alpha.3) (2024-09-14)
 
 
