@@ -33,10 +33,41 @@ npx npm-increaser-downloads
 
 ### 🚀 Running
 
-Setup configuration and run:
+You can run npm-increaser-downloads in two ways:
+
+1. Interactive mode:
 
 ```bash
-npm-increaser-downloads
+nid
+```
+
+This will prompt you for the necessary configuration options.
+
+2. Command-line arguments:
+
+```bash
+nid [options]
+```
+
+Available options:
+
+- `-p, --package-name <name>`: NPM package to increase the downloads of
+- `-n, --num-downloads <number>`: Number of times to download the package
+- `-m, --max-concurrent-downloads <number>`: Amount of downloads to run in parallel at once
+- `-t, --download-timeout <number>`: Max time (in ms) to wait for a download to complete
+- `help`: Display help information
+
+Examples:
+
+```bash
+nid -p my-package -n 1000 -m 300 -t 3000
+nid --package-name my-package --num-downloads 1000 --max-concurrent-downloads 300 --download-timeout 3000
+```
+
+For more information and all available options, run:
+
+```bash
+nid help
 ```
 
 Once you specify your configuration, this will start spamming downloads for the provided package in the npmjs registry. This will increase the popularity score of the npm package.
@@ -52,7 +83,7 @@ NOTE: The npmJS Weekly Downloads are updated **once every 24 hours**, so results
 | Property               | Description                                             | Example                     |
 | ---------------------- | ------------------------------------------------------- | --------------------------- |
 | packageName            | NPM package to increase the downloads of                | `"npm-increaser-downloads"` |
-| numDownloads           | Number of times to download the package                 | `100000`                    |
+| numDownloads           | Number of times to download the package                 | `1000`                      |
 | maxConcurrentDownloads | Amount of downloads to run in parallel at once          | `300`                       |
 | downloadTimeout        | Max time (in ms) to wait for for a download to complete | `3000`                      |
 
@@ -65,7 +96,7 @@ NOTE: The npmJS Weekly Downloads are updated **once every 24 hours**, so results
 Install the project using:
 
 ```bash
-git clone https://github.com/lachiejames/npm-increaser-downloads.git
+git clone https://github.com/MinhOmega/npm-increaser-downloads
 ```
 
 ### 🔧 Setting up your configuration
@@ -115,3 +146,17 @@ Formatting code:
 ```bash
 npm run format
 ```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

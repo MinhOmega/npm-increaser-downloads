@@ -5,6 +5,7 @@ import { NpmjsResponse } from "../models/npmjs-response.model";
 import { NpmsioResponse } from "../models/npmsio-response.model";
 import { Stats } from "../models/stats.model";
 import { getEncodedPackageName, stripOrganisationFromPackageName } from "./utils";
+import { terminalSpinner } from "../cli/logger";
 
 export const getNpmsioResponse = async () => {
   const encodedPackageName: string = getEncodedPackageName(getConfig().packageName);
@@ -36,15 +37,18 @@ export const getNpmjsResponse = async (): Promise<NpmjsResponse> => {
 
 export const getVersionPackage = async (): Promise<string> => {
   try {
+    terminalSpinner.start();
     const npmioResponse = await getNpmsioResponse();
+    terminalSpinner.succeed(`Package version found on npms.io with version ${npmioResponse.collected.metadata.version}`);
     return npmioResponse.collected.metadata.version;
   } catch (npmioError) {
-    console.log("Package not found in npms.io, trying npmjs.com...");
+    terminalSpinner.text = "Package not found in npms.io, trying npmjs.com...";
     try {
       const npmjsResponse = await getNpmjsResponse();
-      console.log(`Package found on npmjs.com with version ${npmjsResponse.version}`);
+      terminalSpinner.succeed(`Package found on npmjs.com with version ${npmjsResponse.version}`);
       return npmjsResponse.version;
     } catch (npmjsError) {
+      terminalSpinner.fail("Failed to get package version");
       throw new Error(`Failed to get package version: ${npmioError.message}, ${npmjsError.message}`);
     }
   }
