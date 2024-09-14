@@ -1,5 +1,12 @@
 
 
+## [0.1.1-alpha.3](https://github.com/MinhOmega/npm-increaser-downloads/compare/v0.1.1-alpha.2...v0.1.1-alpha.3) (2024-09-14)
+
+
+### Features
+
+* implement command-line arguments ([b41ff50](https://github.com/MinhOmega/npm-increaser-downloads/commit/b41ff5066eed12ab80a507c049d069d61f69924e))
+
 ## [0.1.1-alpha.2](https://github.com/MinhOmega/npm-increaser-downloads/compare/v0.1.1-alpha.1...v0.1.1-alpha.2) (2024-09-14)
 
 
