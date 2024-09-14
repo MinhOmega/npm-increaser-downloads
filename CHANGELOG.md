@@ -1,5 +1,12 @@
 
 
+## [1.0.0](https://github.com/MinhOmega/npm-increaser-downloads/compare/v0.1.0...v1.0.0) (2024-09-14)
+
+
+### Features
+
+* implement new package prompt and new CLI ([#4](https://github.com/MinhOmega/npm-increaser-downloads/issues/4)) ([81ed283](https://github.com/MinhOmega/npm-increaser-downloads/commit/81ed2833b0f9c95f3d7405bcaecc67e9d4e1f37a))
+
 ## [0.1.1-alpha.5](https://github.com/MinhOmega/npm-increaser-downloads/compare/v0.1.1-alpha.4...v0.1.1-alpha.5) (2024-09-14)
 
 ## [0.1.1-alpha.4](https://github.com/MinhOmega/npm-increaser-downloads/compare/v0.1.1-alpha.3...v0.1.1-alpha.4) (2024-09-14)
