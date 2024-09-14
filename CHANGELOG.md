@@ -1,5 +1,7 @@
 
 
+## [0.1.1-alpha.5](https://github.com/MinhOmega/npm-increaser-downloads/compare/v0.1.1-alpha.4...v0.1.1-alpha.5) (2024-09-14)
+
 ## [0.1.1-alpha.4](https://github.com/MinhOmega/npm-increaser-downloads/compare/v0.1.1-alpha.3...v0.1.1-alpha.4) (2024-09-14)
 
 
