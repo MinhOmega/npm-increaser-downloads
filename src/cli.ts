@@ -51,9 +51,14 @@ const runWithArgs = (
     "download-timeout"?: number;
   }>,
 ) => {
-  // If no arguments are provided, show the help message and exit
-  if (Object.keys(args).length === 1 && args._ && args._.length === 0) {
-    yargs.showHelp();
+  // Check if any relevant argument was provided
+  const hasAnyArg = ["package-name", "num-downloads", "max-concurrent-downloads", "download-timeout"].some(
+    (arg) => args[arg] !== undefined
+  );
+
+  if (!hasAnyArg) {
+    // If no relevant arguments were provided, fall back to CLI prompts
+    getConfigFromCli().then(setConfig).then(run);
     return;
   }
 
@@ -70,19 +75,10 @@ const runWithArgs = (
     setConfig(config as Config);
     run();
   } else {
-    // Check if any argument was provided
-    const hasAnyArg = Object.values(args).some((arg) => arg !== undefined && arg !== "_");
-    if (hasAnyArg) {
-      // If any argument was provided but config is incomplete, throw an error
-      const missingOptions = Object.entries(config)
-        .filter(([_, value]) => value === undefined)
-        .map(([key]) => key)
-        .join(", ");
-      throw new Error(`Missing required options: ${missingOptions}`);
-    } else {
-      // If no arguments were provided, fall back to CLI prompts
-      getConfigFromCli().then(setConfig).then(run);
-    }
+    // If any argument was provided but config is incomplete, show help and exit
+    console.log("Incomplete configuration. Please provide all required options or run without arguments for interactive mode.");
+    yargs.showHelp();
+    process.exit(1);
   }
 };
 
